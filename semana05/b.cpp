@@ -35,7 +35,7 @@ int main() {
     int t;
     cin >> t;
     for (; t > 0; t--) {
-        int64_t _a, _n, _b, _m, _k;
+        int32_t _a, _n, _b, _m, _k;
         __int128_t a, n, b, m, k;
         cin >> _a >> _n >> _b >> _m;
         a = _a; b = _b; n = _n; m = _m; 
@@ -46,7 +46,7 @@ int main() {
         } else {
             auto k2 = ((b - a) / r) * s % (m / r);
             auto x = (a + (k2 * n)) % k;
-            cout << (int64_t) x << " " << (int64_t) k << endl;
+            cout << (int32_t) x << " " << (int32_t) k << endl;
         }
     }
 }

@@ -6,31 +6,31 @@
 
 using namespace std;
 
-int32_t sieve_size;
+int64_t sieve_size;
 bitset<100000010> isprime;
-vector<int32_t> primes;
+vector<int64_t> primes;
 
 
 /**
  * funções sieve, is_prime e prime_factors tomadas do slide
  */
-void sieve(int32_t upperbound) {
+void sieve(int64_t upperbound) {
     sieve_size = upperbound + 1;
     isprime.set();
     isprime[0] = isprime[1] = 0;
-    for (int32_t i = 2; i <= sieve_size; i++) {
-        for (int32_t j = i * i; j <= sieve_size; j += i) {
+    for (int64_t i = 2; i <= sieve_size; i++) {
+        for (int64_t j = i * i; j <= sieve_size; j += i) {
             isprime[j] = 0;
         }
         primes.push_back(i);
     }
 }
 
-bool is_prime(int32_t n) {
+bool is_prime(int64_t n) {
     if (n <= sieve_size) {
         return isprime[n];
     }
-    for (int32_t i = 0; i < primes.size(); i++) {
+    for (int64_t i = 0; i < primes.size(); i++) {
         if (n % primes[i] == 0) {
             return false;
         }
@@ -38,9 +38,9 @@ bool is_prime(int32_t n) {
     return true;
 }
 
-vector<int32_t> prime_factors(int32_t n) {
-    vector<int32_t> factors;
-    int32_t pf_idx = 0, pf = primes[pf_idx];
+vector<int64_t> prime_factors(int64_t n) {
+    vector<int64_t> factors;
+    int64_t pf_idx = 0, pf = primes[pf_idx];
     while (n != 1 && (pf * pf <= n)) {
         while (n % pf == 0) {
             n /= pf;
@@ -56,13 +56,13 @@ vector<int32_t> prime_factors(int32_t n) {
 
 int main() {
     sieve(31622777);
-    int32_t n;
+    int64_t n;
     for (cin >> n; n != 0; cin >> n) {
-        vector<int32_t> factors =  prime_factors(n);
-        int32_t last_factor = factors[0];
-        int32_t e = 1;
+        vector<int64_t> factors =  prime_factors(n);
+        int64_t last_factor = factors[0];
+        int64_t e = 1;
         for (size_t i = 1; i < factors.size(); i++) {
-            int32_t new_factor = factors[i];
+            int64_t new_factor = factors[i];
             if (new_factor == last_factor) {
                 e++;
             } else {
